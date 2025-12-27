@@ -1,0 +1,180 @@
+
+# **PROJEK KamiBantu (VOLUNTEER FINDER (LITE))**
+
+### *Platform Pencarian dan Publikasi Kegiatan Relawan Berbasis Website*
+
+---
+
+## **A. Petunjuk Umum**
+
+* Baca dan pahami kebutuhan sistem sebelum melakukan perancangan.
+* Proses pengembangan dilakukan sesuai alur yang telah ditentukan.
+* Sistem dibuat dalam bentuk website sederhana dengan fokus pada fungsionalitas utama.
+
+---
+
+## **B. Skenario Tugas Praktik**
+
+Seorang pengembang perangkat lunak diminta untuk membuat sebuah aplikasi berbasis website yang berfungsi sebagai **media pencarian dan publikasi kegiatan relawan**.
+
+Aplikasi ini dibuat berdasarkan permasalahan di masyarakat, di mana banyak kegiatan relawan dipublikasikan secara bebas melalui media sosial tanpa kejelasan identitas penyelenggara. Kondisi tersebut menimbulkan keraguan bagi calon relawan untuk ikut serta karena adanya kekhawatiran terhadap penipuan atau kegiatan relawan fiktif.
+
+Untuk mengatasi permasalahan tersebut, sistem dirancang dengan menerapkan **mekanisme akun dan kredibilitas sebagai dasar kepercayaan kegiatan relawan**. Setiap pihak yang ingin membuat acara kerja relawan diwajibkan memiliki akun terdaftar, sehingga setiap kegiatan yang dipublikasikan memiliki identitas penyelenggara yang jelas dan dapat ditelusuri sumbernya.
+
+Selain itu, sistem juga menerapkan **mekanisme konfirmasi penyelesaian acara dua arah** antara relawan dan penyelenggara. Relawan diberikan tombol *“Selesai”* sebagai bentuk konfirmasi keikutsertaan, sedangkan penyelenggara hanya dapat menyelesaikan acara apabila **minimal 80% relawan telah menyatakan selesai**. Mekanisme ini digunakan untuk memastikan bahwa acara benar-benar terlaksana dan mencegah manipulasi status kegiatan.
+
+---
+
+## **C. Pengguna Sistem dan Hak Akses**
+
+Sistem Volunteer Finder (Lite) memiliki **dua jenis pengguna**, yaitu:
+
+### **1. User (Relawan / Calon Relawan)**
+
+User adalah masyarakat umum yang telah melakukan login dan berperan sebagai relawan.
+
+**Hak akses user:**
+
+* Login ke sistem
+* Melihat daftar kegiatan relawan
+* Melihat detail kegiatan relawan
+* Melihat lokasi kegiatan melalui peta
+* Menyatakan keikutsertaan dalam kegiatan
+* Menekan tombol *“Selesai”* setelah kegiatan diikuti
+
+---
+
+### **2. Penyelenggara Kegiatan**
+
+Penyelenggara adalah user yang menggunakan akun untuk membuat dan mengelola kegiatan relawan.
+
+**Hak akses penyelenggara:**
+
+* Login ke sistem
+* Membuat kegiatan relawan
+* Mengedit dan menghapus kegiatan relawan
+* Melihat daftar relawan yang mengikuti kegiatan
+* Menyelesaikan acara melalui tombol *“Selesaikan Acara”*
+
+Tombol *“Selesaikan Acara”* **hanya dapat digunakan apabila minimal 80% relawan telah menekan tombol “Selesai”**, sebagai bentuk validasi bahwa kegiatan benar-benar terlaksana.
+
+Satu akun dapat berperan sebagai **relawan maupun penyelenggara**, dengan sistem reputasi yang dicatat berdasarkan aktivitas masing-masing peran.
+
+---
+
+## **D. Fitur Utama Sistem**
+
+### **1. Login User**
+
+Setiap user diwajibkan melakukan login untuk mengakses fitur relawan maupun penyelenggara, sehingga seluruh aktivitas dapat tercatat dan digunakan sebagai dasar penilaian kredibilitas akun.
+
+---
+
+### **2. Manajemen Kegiatan Relawan (CRUD)**
+
+Penyelenggara dapat:
+
+* Menambahkan kegiatan relawan
+* Mengedit data kegiatan
+* Menghapus kegiatan yang tidak valid
+
+Data kegiatan meliputi:
+
+* Nama kegiatan
+* Deskripsi singkat
+* Lokasi kegiatan
+* Waktu pelaksanaan
+* Kategori kegiatan
+
+---
+
+### **3. Daftar Kegiatan Relawan**
+
+Sistem menampilkan daftar kegiatan relawan yang tersedia dan dapat diakses oleh seluruh user yang telah login.
+
+---
+
+### **4. Detail Kegiatan**
+
+Setiap kegiatan memiliki halaman detail yang berisi:
+
+* Informasi lengkap kegiatan
+* Identitas dan reputasi penyelenggara
+* Jumlah relawan terdaftar
+* Status kegiatan
+
+---
+
+### **5. Peta Lokasi Kegiatan**
+
+Sistem menggunakan peta digital untuk menampilkan lokasi kegiatan relawan secara visual.
+
+---
+
+### **6. Tombol “Selesai” (Relawan)**
+
+Relawan dapat menekan tombol *“Selesai”* setelah mengikuti kegiatan sebagai bentuk konfirmasi keikutsertaan. Konfirmasi ini digunakan sebagai dasar perhitungan penyelesaian acara dan penilaian reputasi relawan.
+
+---
+
+### **7. Tombol “Selesaikan Acara” (Penyelenggara)**
+
+Penyelenggara dapat menekan tombol *“Selesaikan Acara”* untuk mengubah status kegiatan menjadi selesai. Tombol ini **hanya aktif apabila minimal 80% relawan telah menekan tombol “Selesai”**.
+
+---
+
+### **8. Sistem Reputasi Akun**
+
+Sistem memberikan penilaian reputasi akun berdasarkan:
+
+* Keikutsertaan relawan dalam kegiatan
+* Keberhasilan penyelenggara menyelesaikan acara
+* Riwayat aktivitas akun
+
+Reputasi digunakan sebagai indikator tingkat kepercayaan terhadap relawan maupun penyelenggara.
+
+---
+
+## **E. Alur Sistem**
+
+### **Alur Relawan:**
+
+1. User login ke sistem
+2. User memilih dan mengikuti kegiatan relawan
+3. User menekan tombol *“Selesai”* setelah kegiatan diikuti
+
+### **Alur Penyelenggara:**
+
+1. Penyelenggara login ke sistem
+2. Penyelenggara membuat dan mengelola kegiatan
+3. Penyelenggara memantau status relawan
+4. Penyelenggara menekan tombol *“Selesaikan Acara”* setelah ≥80% relawan selesai
+
+---
+
+## **F. Batasan Sistem (Versi Lite)**
+
+Untuk menjaga fokus dan menyesuaikan dengan waktu pengerjaan, sistem ini memiliki batasan:
+
+* Tidak terdapat sistem sertifikat relawan
+* Tidak terdapat sistem verifikasi kehadiran berbasis lokasi
+* Tidak terdapat sistem notifikasi otomatis
+* Tidak terdapat sistem pelaporan lanjutan
+
+---
+
+## **G. Tujuan Pembuatan Sistem**
+
+Tujuan pembuatan Volunteer Finder (Lite) adalah:
+
+* Menyediakan media pencarian kegiatan relawan yang terpusat
+* Mengurangi potensi penipuan kegiatan relawan
+* Meningkatkan kepercayaan masyarakat terhadap kegiatan sosial
+* Menyediakan sistem validasi penyelesaian acara yang adil
+* Menjadi prototipe awal untuk pengembangan sistem relawan yang lebih lengkap
+
+---
+
+## **H. Kesimpulan**
+
+Volunteer Finder (Lite) merupakan sistem berbasis website yang dirancang untuk meningkatkan kepercayaan dalam kegiatan relawan. Dengan mewajibkan login, menerapkan sistem reputasi akun, serta menggunakan mekanisme konfirmasi penyelesaian acara dua arah antara relawan dan penyelenggara, sistem ini mampu meminimalkan potensi penipuan dan memastikan bahwa kegiatan relawan yang dipublikasikan benar-benar terlaksana.

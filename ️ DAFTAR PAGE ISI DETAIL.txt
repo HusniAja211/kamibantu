@@ -1,0 +1,270 @@
+# 🗺️ DAFTAR PAGE & ISI DETAIL
+
+**Volunteer Finder (Lite → MVP solid)**
+
+---
+
+## 1️⃣ Login
+
+📍 `/login`
+
+### Tujuan
+
+* Gerbang masuk aplikasi
+* Membangun rasa “aku mau ikut berbuat baik”
+
+### Isi Utama
+
+* Headline motivasional
+  *“Jadilah bagian dari perubahan 🌱”*
+* Form:
+
+  * Email
+  * Password
+* Opsi:
+
+  * Ingat saya
+  * Lupa password
+* CTA utama:
+
+  * **Masuk & Mulai Beraksi**
+* CTA sekunder:
+
+  * Link ke Register
+
+---
+
+## 2️⃣ Register
+
+📍 `/register`
+
+### Tujuan
+
+* Mengajak user bergabung
+* Menjelaskan konsep 1 akun = relawan + penyelenggara
+
+### Isi Utama
+
+* Headline:
+  *“Mulai langkah kebaikanmu 💚”*
+* Form:
+
+  * Nama lengkap
+  * Email
+  * Password
+  * Konfirmasi password
+* Informasi singkat:
+
+  * “Satu akun untuk ikut dan membuat kegiatan”
+* CTA:
+
+  * **Daftar & Mulai Berbuat Baik**
+* Link ke Login
+
+---
+
+## 3️⃣ Dashboard / Kegiatan
+
+📍 `/dashboard` atau `/events`
+
+### Tujuan
+
+* Halaman utama setelah login
+* Menampilkan semua kegiatan relawan
+
+### Isi Utama
+
+* Header:
+
+  * “Temukan Kegiatan Relawan 🌱”
+* Filter ringan (opsional):
+
+  * Kategori
+  * Lokasi
+* Daftar kegiatan (card):
+
+  * Nama kegiatan
+  * Kategori
+  * Lokasi & tanggal
+  * Nama penyelenggara
+  * Badge reputasi
+* CTA di setiap card:
+
+  * **Lihat Detail**
+
+---
+
+## 4️⃣ Detail Kegiatan
+
+📍 `/events/{id}`
+
+### Tujuan
+
+* Memberi informasi lengkap
+* Membangun kepercayaan sebelum ikut
+
+### Isi Utama
+
+* Judul kegiatan
+* Status kegiatan:
+
+  * Akan datang / Berlangsung / Selesai
+* Deskripsi lengkap
+* Informasi:
+
+  * Lokasi (teks / map)
+  * Tanggal & waktu
+  * Jumlah relawan
+* Informasi penyelenggara:
+
+  * Nama
+  * Reputasi
+* CTA:
+
+  * **Ikut Kegiatan**
+  * **Saya Selesai** (jika relawan)
+
+---
+
+## 5️⃣ Buat Kegiatan
+
+📍 `/events/create`
+
+### Tujuan
+
+* Memfasilitasi user sebagai penyelenggara
+* Menjaga kesederhanaan
+
+### Isi Utama
+
+* Judul:
+
+  * “Buat Kegiatan Relawan”
+* Form:
+
+  * Nama kegiatan
+  * Deskripsi singkat
+  * Kategori
+  * Lokasi
+  * Tanggal
+* CTA:
+
+  * **Simpan Kegiatan**
+
+---
+
+## 6️⃣ Kelola Kegiatan
+
+📍 `/events/{id}/manage`
+
+### Tujuan
+
+* Mengontrol jalannya kegiatan
+* Mencegah kecurangan (80% rule)
+
+### Isi Utama
+
+* Judul:
+
+  * “Kelola Kegiatan”
+* Progress relawan:
+
+  * Progress bar (% relawan selesai)
+* Daftar relawan:
+
+  * Nama
+  * Status (Selesai / Belum)
+* CTA:
+
+  * **Selesaikan Acara**
+
+    * Aktif hanya jika ≥80% relawan selesai
+
+---
+
+## 7️⃣ Profil User
+
+📍 `/profile`
+
+### Tujuan
+
+* Transparansi akun
+* Menampilkan kredibilitas
+
+### Isi Utama
+
+* Informasi user:
+
+  * Nama
+  * Email
+* Reputasi sebagai relawan:
+
+  * Level / bintang
+  * Jumlah kegiatan diikuti
+* Reputasi sebagai penyelenggara:
+
+  * Level / bintang
+  * Jumlah kegiatan dibuat
+* Riwayat singkat (opsional)
+
+---
+
+## 8️⃣ Aktivitas Saya (Opsional tapi Bagus)
+
+📍 `/my-activities`
+
+### Tujuan
+
+* Memberi ringkasan aktivitas user
+
+### Isi Utama
+
+* Tab:
+
+  * **Sebagai Relawan**
+  * **Sebagai Penyelenggara**
+* Daftar kegiatan:
+
+  * Status
+  * Link ke detail
+
+---
+
+## 9️⃣ Empty State (Bukan Page, Tapi Penting)
+
+### Digunakan Saat:
+
+* Belum ada kegiatan
+* Belum ikut apa pun
+
+### Isi
+
+* Ilustrasi ringan / icon
+* Pesan:
+
+  * “Belum ada kegiatan, yuk mulai dari satu aksi kecil”
+* CTA:
+
+  * **Buat Kegiatan**
+  * **Cari Kegiatan**
+
+---
+
+## 🧾 RINGKASAN CEKLIST (UNTUK LOMBA)
+
+| Page          | Status     |
+| ------------- | ---------- |
+| Login         | ✅          |
+| Register      | ✅          |
+| Dashboard     | ✅          |
+| Detail Event  | ✅          |
+| Create Event  | ✅          |
+| Manage Event  | ✅          |
+| Profile       | ✅          |
+| My Activities | ✅          |
+
+---
+
+## 🎤 KALIMAT PENJELASAN SIAP PAKAI
+
+> “Setiap halaman dirancang berdasarkan kebutuhan pengguna, dengan fokus pada transparansi, kepercayaan, dan kemudahan berpartisipasi dalam kegiatan relawan.”
