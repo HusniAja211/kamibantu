@@ -24,8 +24,8 @@
                 <div class="relative" @click.away="open = false">
                     <button @click="open = !open" class="flex items-center gap-3 focus:outline-none group">
                         <div class="text-right hidden sm:block">
-                            <p class="text-sm font-semibold text-gray-800 group-hover:text-green-600">Andi</p>
-                            <p class="text-[10px] text-yellow-500 font-bold uppercase tracking-wider">⭐⭐</p>
+                            <p class="text-sm font-semibold text-gray-800 group-hover:text-green-600">{{ Auth::user()->name }}</p>
+                            <!-- <p class="text-[10px] text-yellow-500 font-bold uppercase tracking-wider">⭐⭐</p> -->
                         </div>
                         
                         <div class="relative">

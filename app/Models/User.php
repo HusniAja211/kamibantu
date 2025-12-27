@@ -20,6 +20,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'phone',
         'password',
     ];
 
@@ -55,6 +56,13 @@ class User extends Authenticatable
 
         return compact('joined', 'completed');
     }
+
+    /* ===== Umum ===== */
+    public function getRatingAttribute()
+    {
+        return number_format(rand(40, 50) / 10, 1); // dummy realistis
+    }
+
 
     /**
      * The attributes that should be hidden for serialization.

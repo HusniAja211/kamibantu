@@ -11,9 +11,25 @@ class Event extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'description', 'category',
-        'location', 'event_date', 'organizer_id', 'status'
+        'title',
+        'description',
+        'category',
+        'location_name',
+        'latitude',
+        'longitude',
+        'start_date',
+        'end_date',
+        'target_volunteers',
+        'banner_path',
+        'organizer_id',
+        'status',
     ];
+
+    protected $casts = [
+        'start_date' => 'datetime',
+        'end_date'   => 'datetime',
+    ];
+
 
     /* ===== RELATION ===== */
 

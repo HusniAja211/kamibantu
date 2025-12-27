@@ -17,29 +17,23 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        
+        @forelse ($events as $event)
         <x-activity-card 
-            id="1"
-            image="https://images.unsplash.com/photo-1593113598332-cd288d649433?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-            category="Lingkungan"
-            title="Bersih Pantai Ancol: Jaga Laut Kita"
-            date="24 Des 2024"
-            location="Jakarta Utara"
-            organizer="Green Earth ID"
-            rating="4.9"
-        />
-
-        <x-activity-card 
-            id="2"
-            image="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-            category="Edukasi"
-            categoryColor="blue" 
-            title="Mengajar Anak Jalanan: Kelas Inspirasi"
-            date="26 Des 2024"
-            location="Bogor"
-            organizer="Yayasan Peduli"
-            rating="4.5"
-        />
-
+            :id="$event->id"
+            :image="$event->banner_path 
+                ? asset('storage/' . $event->banner_path) 
+                : 'https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=800&q=80'"
+            :category="$event->category"
+            :title="$event->title"
+            :date="$event->start_date->format('d M Y')"
+            :location="$event->location_name"
+            :organizer="$event->organizer->name"
+            :rating="$event->organizer->rating ?? '0.0'"
+            />
+        @empty
+            <p class="text-gray-500 col-span-full">
+                Belum ada kegiatan tersedia.
+            </p>
+        @endforelse
     </div>
 </x-app-layout>

@@ -50,7 +50,7 @@
             </div>
         </div>
         
-        <a href="#" class="mt-4 w-full block text-center bg-green-500 hover:bg-green-600 text-white font-medium py-2.5 px-4 rounded-xl transition duration-200 shadow-green-200 shadow-md">
+        <a href="{{ route('events.show', $id) }}" class="mt-4 w-full block text-center bg-green-500 hover:bg-green-600 text-white font-medium py-2.5 px-4 rounded-xl transition duration-200 shadow-green-200 shadow-md">
             Lihat Detail
         </a>
     </div>

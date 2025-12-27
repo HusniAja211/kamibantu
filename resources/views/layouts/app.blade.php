@@ -13,12 +13,23 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
     </head>
     <body class="font-sans antialiased bg-gray-50 text-gray-800 flex flex-col min-h-screen">
         @include('layouts.navigation')
 
     <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {{ $slot }}
+        <!-- Trik yang saya pelajari. 
+        Tailwind CSS tidak memuat kelas-kelas yang tidak digunakan dalam file, 
+        jadi saya membuat hidden div dengan class yang dibutuhkan untuk memuatnya ke dalam 
+        file CSS agar semua bg-red-100 di file lain berfungsi.
+        Kalau gak seperti ini maka bg-red-100 gak akan berfungsi-->
+        <div class="bg-red-100" hidden></div>
     </main>
         @include('layouts.footer')
     </body>

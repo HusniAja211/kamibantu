@@ -19,6 +19,11 @@
                 @include('profile.partials.update-profile-information-form')
             </div>
 
+            <!-- {{-- Card 1: Informasi Profil --}} -->
+            <div class="p-6 sm:p-10 bg-white shadow-sm border border-green-100 rounded-3xl hover:shadow-md transition-shadow duration-300">
+                @include('profile.partials.user-rating')
+            </div>
+
             <!-- {{-- Card 2: Update Password --}} -->
             <div class="p-6 sm:p-10 bg-white shadow-sm border border-green-100 rounded-3xl hover:shadow-md transition-shadow duration-300">
                 @include('profile.partials.update-password-form')

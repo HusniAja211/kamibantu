@@ -52,7 +52,16 @@
                                     placeholder="nama@email.com" />
                                 <x-input-error :messages="$errors->get('email')" class="mt-1" />
                             </div>
-                            
+
+                            <div>
+                                <label for="phone" class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Nomor Telepon</label>
+                                <x-text-input id="phone"
+                                    class="block w-full px-4 py-2 bg-gray-50 border-gray-200 focus:border-green-500 focus:ring-green-500 rounded-lg text-sm transition-all"
+                                    type="text" name="phone" inputmode="numeric" pattern="[0-9]{13}" minlength="13" maxlength="13"
+                                    :value="old('phone')"  required 
+                                    placeholder="62xxx"/>
+                                <x-input-error :messages="$errors->get('phone')" class="mt-1" />
+                            </div>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                                 <div>
