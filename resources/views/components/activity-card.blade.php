@@ -5,8 +5,7 @@
     'title', 
     'date', 
     'location', 
-    'organizer', 
-    'rating',
+    'organizerUser', 
     'categoryColor' => 'green' // Default warna hijau
 ])
 
@@ -40,11 +39,12 @@
 
         <div class="flex items-center justify-between mt-auto">
             <div class="flex items-center gap-2">
-                <img src="https://ui-avatars.com/api/?name={{ urlencode($organizer) }}&background=random" class="w-8 h-8 rounded-full" alt="Organizer">
+                <img src="https://ui-avatars.com/api/?name={{ urlencode($organizerUser->name) }}&background=random" class="w-8 h-8 rounded-full" alt="Organizer">
                 <div>
-                    <p class="text-xs font-semibold text-gray-700">{{ $organizer }}</p>
+                    <p class="text-xs font-semibold text-gray-700">{{ $organizerUser->name }}</p>
+                    @php($rating = $organizerUser->organizerRating())
                     <div class="flex text-yellow-400 text-[10px]">
-                        ★★★★★ <span class="text-gray-400 ml-1">({{ $rating }})</span>
+                        <span class="text-gray-400 ml-1">({{ $rating['level'] }})</span>
                     </div>
                 </div>
             </div>

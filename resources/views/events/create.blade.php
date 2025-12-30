@@ -123,7 +123,7 @@
 
                 <!-- {{-- RIGHT --}} -->
                 <div class="lg:col-span-1">
-                    <div class="bg-white p-6 rounded-3xl border border-gray-400 shadow-sm sticky top-24">
+                    <div class="bg-white p-6 rounded-3xl border border-gray-400 shadow-sm top-24">
                         <h3 class="text-sm font-bold text-gray-900 mb-4">Tips Penulisan Efektif 💡</h3>
                         <ul class="space-y-4">
                             <li class="flex items-start">

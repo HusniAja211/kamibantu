@@ -14,7 +14,7 @@
     <!-- FULL PAGE BACKGROUND -->
     <div
         class="min-h-screen bg-cover bg-center relative"
-        style="background-image: url({{ 'images/volunteer_5.jpg' }});"
+        style="background-image: url('{{ asset('images/volunteer_5.jpg') }}');"
     >
         <!-- Overlay -->
         <div class="absolute inset-0 bg-green-900/60"></div>

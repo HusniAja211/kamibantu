@@ -37,6 +37,19 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/myactivities', [EventController::class, 'myActivities'])
         ->name('myactivities');
 
+    // untuk button ikuti kegiatan ini
+    Route::post('/events/{event}/join', [EventController::class, 'join'])
+        ->name('events.join');
+
+    // Untuk menyelesaikan event dari relawan
+    Route::post('/events/{event}/complete', [EventController::class, 'completeParticipation'])
+        ->name('events.complete');
+
+    // Untuk menyelesaikan event dari penyelenggara
+    Route::post('/events/{event}/finish', [EventController::class, 'finishEvent'])
+        ->name('events.finish');
+
+
     // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])
         ->name('profile.edit');
@@ -44,6 +57,13 @@ Route::middleware(['auth'])->group(function () {
         ->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])
         ->name('profile.destroy');
+    Route::patch('/profile/avatar', [ProfileController::class, 'updateAvatar'])
+        ->middleware('auth')
+        ->name('profile.avatar.update');
+    Route::delete('/profile/avatar', [ProfileController::class, 'destroyAvatar'])
+        ->middleware('auth')
+        ->name('profile.avatar.destroy');
+
 });
 
 require __DIR__.'/auth.php';

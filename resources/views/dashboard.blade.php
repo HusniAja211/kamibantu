@@ -19,16 +19,13 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         @forelse ($events as $event)
         <x-activity-card 
-            :id="$event->id"
-            :image="$event->banner_path 
-                ? asset('storage/' . $event->banner_path) 
-                : 'https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=800&q=80'"
-            :category="$event->category"
-            :title="$event->title"
-            :date="$event->start_date->format('d M Y')"
-            :location="$event->location_name"
-            :organizer="$event->organizer->name"
-            :rating="$event->organizer->rating ?? '0.0'"
+                :id="$event->id"
+                :image="$event->banner_path ? asset('storage/'.$event->banner_path) : 'https://images.unsplash.com/photo-1593113598332-cd288d649433'"
+                :category="$event->category"
+                :title="$event->title"
+                :date="$event->start_date->format('d M Y')"
+                :location="$event->location_name"
+                :organizerUser="$event->organizer"
             />
         @empty
             <p class="text-gray-500 col-span-full">

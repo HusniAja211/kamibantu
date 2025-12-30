@@ -68,8 +68,43 @@ class Event extends Model
         return ($completed / $total) * 100;
     }
 
-    public function canBeFinished()
+    public function canBeFinished(): bool
     {
-        return $this->completionRate() >= 80;
+        $joined = $this->participants()->count();
+        $completed = $this->participants()
+            ->where('status', 'completed')
+            ->count();
+
+        //minimal relawan nyata 
+        $minimumParticipants = max(
+            3, // minimal absolut
+            ceil(($this->target_volunteers ?? 0) * 0.3) // 30% dari target
+        );
+
+        if ($joined < $minimumParticipants) {
+            return false;
+        }
+
+        return ($completed / $joined) >= 0.8;
     }
+
+    public function completionInfo(): array
+    {
+        $joined = $this->participants()->count();
+        $completed = $this->participants()
+            ->where('status', 'completed')
+            ->count();
+
+        return [
+            'joined' => $joined,
+            'completed' => $completed,
+            'rate' => $joined > 0 ? round(($completed / $joined) * 100) : 0,
+            'minimum_required' => max(
+                3,
+                ceil(($this->target_volunteers ?? 0) * 0.3)
+            ),
+        ];
+    }
+
+
 }

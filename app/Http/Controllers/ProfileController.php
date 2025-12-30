@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -37,6 +38,30 @@ class ProfileController extends Controller
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
+    public function updateAvatar(Request $request)
+    {
+        $request->validate([
+            'avatar' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+        ]);
+
+        $user = $request->user();
+
+        // hapus avatar lama jika ada
+        if ($user->avatar && Storage::disk('public')->exists($user->avatar)) {
+            Storage::disk('public')->delete($user->avatar);
+        }
+
+        // simpan avatar baru
+        $path = $request->file('avatar')->store('avatars', 'public');
+
+        // simpan path ke DB
+        $user->update([
+            'avatar' => $path,
+        ]);
+        return back()->with('success', 'Foto profil berhasil diperbarui');
+    }
+
+
     /**
      * Delete the user's account.
      */
@@ -57,4 +82,20 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+    public function destroyAvatar(Request $request)
+    {
+        $user = $request->user();
+
+        if ($user->avatar && Storage::disk('public')->exists($user->avatar)) {
+            Storage::disk('public')->delete($user->avatar);
+        }
+
+        $user->update([
+            'avatar' => null,
+        ]);
+
+        return back()->with('success', 'Foto profil berhasil dihapus');
+    }
+
 }

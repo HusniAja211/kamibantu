@@ -45,10 +45,17 @@
                 @else
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         @foreach ($joinedEvents as $event)
-                            <x-activity-card :id="$event->id" :image="$event->banner_path
+                            <x-activity-card 
+                                :id="$event->id" 
+                                :image="$event->banner_path
                                 ? asset('storage/' . $event->banner_path)
-                                : 'https://images.unsplash.com/photo-1593113598332-cd288d649433'" :category="$event->category" :title="$event->title"
-                                :date="$event->start_date->format('d M Y')" :location="$event->location_name" :organizer="$event->organizer->name" :rating="number_format($event->organizer->rating ?? 5, 1)" />
+                                : 'https://images.unsplash.com/photo-1593113598332-cd288d649433'"
+                                :category="$event->category" 
+                                :title="$event->title"
+                                :date="$event->start_date->format('d M Y')" 
+                                :location="$event->location_name" 
+                                :organizer-user="$event->organizer"
+                            />
                         @endforeach
                     </div>
                 @endif
@@ -110,9 +117,13 @@
                             </div>
 
                             {{-- CTA --}}
-                            <a href="{{ route('events.manage', $event) }}"
+                            <a href="{{ route('events.show', $event) }}"
                                 class="block w-full py-2.5 bg-gray-900 text-white rounded-xl text-sm font-semibold text-center hover:bg-gray-800 transition">
                                 Kelola Kegiatan
+                            </a>
+                            <a href="{{ route('events.manage', $event) }}"
+                                class="block w-full mt-4 py-2.5 bg-gray-900 text-white rounded-xl text-sm font-semibold text-center hover:bg-gray-800 transition">
+                                Ubah Data
                             </a>
                         </div>
                     @endforeach

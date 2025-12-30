@@ -31,7 +31,7 @@
                     <div class="bg-white p-8 rounded-3xl border border-gray-200 shadow-sm">
                         <div class="flex items-center justify-between mb-4">
                             <span
-                                class="px-3 py-1 {{ $event->status === 'aktif' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600' }} text-xs font-bold rounded-full uppercase tracking-wider">
+                                class="px-3 py-1 {{ $event->status === 'active' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600' }} text-xs font-bold rounded-full uppercase tracking-wider">
                                 {{ ucfirst($event->status) }}
                             </span>
                             <span class="text-xs text-gray-400">Dibuat: {{ $event->created_at->format('d M Y') }}</span>
@@ -145,9 +145,18 @@
                                     <p class="text-sm font-bold text-gray-800">
                                         {{ $event->organizer->name }}
                                     </p>
-                                    <div class="flex text-yellow-400 text-xs">
-                                        ★★★★★ <span
-                                            class="text-gray-400 ml-1 font-medium">({{ $event->organizer->rating ?? '5.0' }})</span>
+                                    @php $organizerRating = $event->organizer->organizerRating(); @endphp
+                                    <div class="flex items-center gap-2 mt-1">
+                                        <span class="text-sm font-semibold text-gray-700">
+                                            {{ $organizerRating['level'] }}
+                                        </span>
+
+                                        @if ($organizerRating['completion_rate'] !== null)
+                                            <span class="text-xs text-gray-700">
+                                                ({{ round($organizerRating['completion_rate'] * 100) }}% selesai ·
+                                                {{ $organizerRating['total'] }} acara)
+                                            </span>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -174,29 +183,81 @@
                                 </div>
                             </div>
                         </div>
+                        @php
+                            $participation = $event->participants->where('user_id', auth()->id())->first();
+                            $isOrganizer = auth()->id() === $event->organizer_id;
+                            $quotaFull =
+                                $event->target_volunteers !== null &&
+                                $event->participants->count() >= $event->target_volunteers;
+                        @endphp
 
-                        {{-- Action Buttons --}}
                         <div class="space-y-3">
-                            <button
-                                class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3.5 rounded-xl transition-all shadow-lg shadow-green-200 transform active:scale-95 flex justify-center items-center gap-2">
-                                <span>Ikut Kegiatan Ini</span>
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-                                </svg>
-                            </button>
 
-                            @if ($event->canBeFinished())
-                                <button
-                                    class="w-full bg-white border-2 border-green-600 text-green-700 font-bold py-3.5 rounded-xl hover:bg-green-50 transition-colors">
-                                    Selesaikan Kegiatan
-                                </button>
+                            {{-- RELAWAN --}}
+                            @if (!$isOrganizer)
+
+                                {{-- BELUM IKUT --}}
+                                @if (!$participation && $event->status === 'active')
+                                    @if ($quotaFull)
+                                        <div
+                                            class="w-full bg-gray-300 text-gray-600 font-bold py-3.5 rounded-xl text-center">
+                                            Kuota relawan sudah penuh
+                                        </div>
+                                    @else
+                                        <form action="{{ route('events.join', $event) }}" method="POST">
+                                            @csrf
+                                            <button
+                                                class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3.5 rounded-xl transition shadow-lg shadow-green-200">
+                                                Ikut Kegiatan Ini
+                                            </button>
+                                        </form>
+                                    @endif
+                                @endif
+
+                                {{-- SUDAH IKUT --}}
+                                @if ($participation && $participation->status === 'joined' && $event->status === 'active')
+                                    <form action="{{ route('events.complete', $event) }}" method="POST">
+                                        @csrf
+                                        <button
+                                            class="w-full border-2 border-green-600 text-green-700 font-bold py-3.5 rounded-xl hover:bg-green-50 transition">
+                                            Saya Selesai
+                                        </button>
+                                    </form>
+                                @endif
+
+                                {{-- SUDAH SELESAI --}}
+                                @if ($participation && $participation->status === 'completed')
+                                    <div
+                                        class="w-full bg-gray-100 text-gray-600 font-bold py-3.5 rounded-xl text-center">
+                                        Terima kasih atas kontribusimu
+                                    </div>
+                                @endif
+
+                                {{-- ORGANIZER --}}
+                            @else
+                                @if ($event->status === 'finished')
+                                    <div
+                                        class="w-full bg-gray-100 text-gray-600 font-bold py-3.5 rounded-xl text-center">
+                                        Kegiatan ini telah selesai
+                                    </div>
+                                @elseif ($event->canBeFinished())
+                                    <form action="{{ route('events.finish', $event) }}" method="POST">
+                                        @csrf
+                                        <button
+                                            class="w-full bg-white border-2 border-green-600 text-green-700 font-bold py-3.5 rounded-xl hover:bg-green-50 transition">
+                                            Selesaikan Kegiatan
+                                        </button>
+                                    </form>
+                                @else
+                                    <div class="text-center text-gray-500 text-sm">
+                                        Belum memenuhi syarat penyelesaian (≥ 80% relawan selesai)
+                                    </div>
+                                @endif
+
                             @endif
                         </div>
-
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

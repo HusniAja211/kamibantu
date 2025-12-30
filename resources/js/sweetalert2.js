@@ -1,8 +1,6 @@
 import Swal from 'sweetalert2'
 window.Swal = Swal
 
-console.log('sweetalert2.js loaded!')
-
 function alertSuccess(message) {
     Swal.fire({
         icon: 'success',
@@ -70,7 +68,7 @@ function confirmDelete(url) {
 }
 
 /**
- * 🔴 INI KUNCINYA
+ * 
  * Expose ke global agar bisa dipakai di Blade
  */
 window.alertSuccess = alertSuccess

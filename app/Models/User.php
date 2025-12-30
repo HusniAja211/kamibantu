@@ -22,10 +22,10 @@ class User extends Authenticatable
         'email',
         'phone',
         'password',
+        'avatar',
     ];
 
      /* ===== RELATION ===== */
-
     // Sebagai penyelenggara
     public function organizedEvents()
     {
@@ -45,8 +45,9 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
-    /* ===== RATING RELAWAN ===== */
+                                              
 
+    /* ===== RATING RELAWAN ===== */
     public function volunteerStats()
     {
         $joined = $this->joinedEvents()->count();
@@ -57,11 +58,82 @@ class User extends Authenticatable
         return compact('joined', 'completed');
     }
 
-    /* ===== Umum ===== */
-    public function getRatingAttribute()
+    /* ===== RATING RELAWAN (HYBRID) ===== */
+    public function volunteerRating()
     {
-        return number_format(rand(40, 50) / 10, 1); // dummy realistis
+        $total = $this->joinedEvents()->count();
+
+        if ($total < 3) {
+            return [
+                'level' => '🌱 Pemula',
+                'stars' => 0,
+                'completion_rate' => null,
+                'total' => $total,
+            ];
+        }
+
+        $completed = $this->joinedEvents()
+            ->wherePivot('status', 'completed')
+            ->count();
+
+        $cr = $completed / $total;
+
+        if ($total >= 10 && $cr >= 0.9) {
+            return ['level' => '⭐⭐⭐ Kontributor', 'stars' => 3, 'completion_rate' => $cr, 'total' => $total];
+        }
+
+        if ($total >= 6 && $cr >= 0.8) {
+            return ['level' => '⭐⭐ Terpercaya', 'stars' => 2, 'completion_rate' => $cr, 'total' => $total];
+        }
+
+        if ($total >= 3 && $cr >= 0.7) {
+            return ['level' => '⭐ Aktif', 'stars' => 1, 'completion_rate' => $cr, 'total' => $total];
+        }
+
+        return [
+            'level' => '🌱 Pemula',
+            'stars' => 0,
+            'completion_rate' => $cr,
+            'total' => $total,
+        ];
     }
+
+     /* ===== RATING Penyelenggara (HYBRID) ===== */
+    public function organizerRating()
+    {
+        $total = $this->organizedEvents()->count();
+
+        if ($total < 2) {
+            return [
+                'level' => '🌱 Baru',
+                'stars' => 0,
+                'completion_rate' => null,
+                'total' => $total,
+            ];
+        }
+
+        $finished = $this->organizedEvents()
+            ->where('status', 'finished')
+            ->count();
+
+        $cr = $finished / $total;
+
+        if ($total >= 4 && $cr >= 0.8) {
+            return ['level' => '⭐⭐ Terpercaya', 'stars' => 2, 'completion_rate' => $cr, 'total' => $total];
+        }
+
+        if ($total >= 2 && $cr >= 0.7) {
+            return ['level' => '⭐ Aktif', 'stars' => 1, 'completion_rate' => $cr, 'total' => $total];
+        }
+
+        return [
+            'level' => '🌱 Baru',
+            'stars' => 0,
+            'completion_rate' => $cr,
+            'total' => $total,
+        ];
+    }
+
 
 
     /**
