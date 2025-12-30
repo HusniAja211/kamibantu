@@ -1,4 +1,4 @@
-## Kamibantu — Platform Manajemen Kegiatan Relawan
+## KamiBantu — Platform Manajemen Kegiatan Relawan
 
 **Kamibantu** adalah platform berbasis web untuk menghubungkan relawan dan penyelenggara kegiatan sosial dalam satu sistem yang transparan, adil, dan terstruktur. Aplikasi ini dirancang untuk memastikan bahwa partisipasi relawan dan kredibilitas penyelenggara dinilai berdasarkan konsistensi dan penyelesaian nyata, bukan sekadar jumlah kegiatan.
 
