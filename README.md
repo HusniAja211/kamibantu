@@ -1,6 +1,6 @@
 ## KamiBantu — Platform Manajemen Kegiatan Relawan
 
-**Kamibantu** adalah platform berbasis web untuk menghubungkan relawan dan penyelenggara kegiatan sosial dalam satu sistem yang transparan, adil, dan terstruktur. Aplikasi ini dirancang untuk memastikan bahwa partisipasi relawan dan kredibilitas penyelenggara dinilai berdasarkan konsistensi dan penyelesaian nyata, bukan sekadar jumlah kegiatan.
+**KamiBantu** adalah platform berbasis web untuk menghubungkan relawan dan penyelenggara kegiatan sosial dalam satu sistem yang transparan, adil, dan terstruktur. Aplikasi ini dirancang untuk memastikan bahwa partisipasi relawan dan kredibilitas penyelenggara dinilai berdasarkan konsistensi dan penyelesaian nyata, bukan sekadar jumlah kegiatan.
 
 ### Fitur Utama
 
@@ -30,7 +30,7 @@ Aplikasi ini menggunakan sistem reputasi berbasis **completion rate** dengan sya
 
 ### Tujuan Pengembangan
 
-Kamibantu dikembangkan sebagai proyek pembelajaran dan kompetisi dengan fokus pada:
+KamiBantu dikembangkan sebagai proyek pembelajaran dan kompetisi dengan fokus pada:
 
 * keadilan sistem reputasi,
 * transparansi proses partisipasi,
