@@ -13,7 +13,6 @@ class Event extends Model
     protected $fillable = [
         'title',
         'description',
-        'category',
         'location_name',
         'latitude',
         'longitude',
@@ -23,6 +22,7 @@ class Event extends Model
         'banner_path',
         'organizer_id',
         'status',
+        'category_id',
     ];
 
     protected $casts = [
@@ -30,6 +30,10 @@ class Event extends Model
         'end_date'   => 'datetime',
     ];
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
 
     /* ===== RELATION ===== */
 

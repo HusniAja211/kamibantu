@@ -15,7 +15,7 @@
         <img src="{{ $image }}" alt="{{ $title }}" class="w-full h-full object-cover">
         <div class="absolute top-4 left-4">
             <span class="bg-white/90 backdrop-blur-sm text-{{ $categoryColor }}-600 text-xs font-bold px-3 py-1 rounded-full shadow-sm">
-                {{ $category }}
+                {{ $category->name }}
             </span>
         </div>
     </div>

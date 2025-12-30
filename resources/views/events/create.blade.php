@@ -26,7 +26,8 @@
                             Banner Kegiatan
                         </span>
 
-                        <div class="border-2 border-dashed border-gray-300 rounded-2xl h-64 flex flex-col items-center justify-center text-center hover:border-green-400 transition">
+                        <div
+                            class="border-2 border-dashed border-gray-300 rounded-2xl h-64 flex flex-col items-center justify-center text-center hover:border-green-400 transition">
                             <svg class="w-10 h-10 text-green-600 mb-3" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -36,8 +37,7 @@
                             <p class="font-semibold text-gray-700">Klik untuk upload gambar</p>
                             <p class="text-xs text-gray-500 mt-1">PNG / JPG maksimal 5MB</p>
 
-                            <input type="file" name="banner"
-                                class="absolute inset-0 opacity-0 cursor-pointer">
+                            <input type="file" name="banner" class="absolute inset-0 opacity-0 cursor-pointer">
                         </div>
                     </div>
 
@@ -58,12 +58,13 @@
                             <div class="grid md:grid-cols-2 gap-5">
                                 <div>
                                     <label class="text-xs font-bold uppercase text-gray-600">Kategori</label>
-                                    <select name="category" required
+                                    <select name="category_id" required
                                         class="w-full mt-2 px-4 py-3 border rounded-xl focus:ring-2 focus:ring-green-200">
-                                        <option value="Lingkungan">Lingkungan</option>
-                                        <option value="Pendidikan">Pendidikan</option>
-                                        <option value="Sosial">Sosial</option>
-                                        <option value="Kesehatan">Kesehatan</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}">
+                                                {{ $category->name }}
+                                            </option>
+                                        @endforeach
                                     </select>
                                 </div>
 
@@ -95,12 +96,8 @@
                                 class="px-4 py-3 border rounded-xl focus:ring-2 focus:ring-green-200">
                         </div>
 
-                        <input 
-                            type="text"
-                            name="location_name"
-                            id="location_input"
-                            placeholder="Klik untuk memilih lokasi"
-                            readonly onclick="openMap()"
+                        <input type="text" name="location_name" id="location_input"
+                            placeholder="Klik untuk memilih lokasi" readonly onclick="openMap()"
                             class="w-full px-4 py-3 border rounded-xl cursor-pointer">
 
                         <!-- {{-- Hidden lat lng --}} -->
@@ -130,15 +127,29 @@
                         <h3 class="text-sm font-bold text-gray-900 mb-4">Tips Penulisan Efektif 💡</h3>
                         <ul class="space-y-4">
                             <li class="flex items-start">
-                                <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="text-sm text-gray-600">Gunakan judul yang <strong>spesifik & menarik</strong>.</span>
+                                <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span class="text-sm text-gray-600">Gunakan judul yang <strong>spesifik &
+                                        menarik</strong>.</span>
                             </li>
                             <li class="flex items-start">
-                                <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="text-sm text-gray-600">Jelaskan <strong>dampak</strong> yang akan dihasilkan.</span>
+                                <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span class="text-sm text-gray-600">Jelaskan <strong>dampak</strong> yang akan
+                                    dihasilkan.</span>
                             </li>
                             <li class="flex items-start">
-                                <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 13l4 4L19 7"></path>
+                                </svg>
                                 <span class="text-sm text-gray-600">Foto yang cerah menarik perhatian 3x lipat.</span>
                             </li>
                         </ul>
@@ -152,32 +163,6 @@
                 </div>
             </div>
         </form>
-        
-    <div id="mapModal"
-     class="fixed inset-0 z-50 hidden bg-black/50 flex items-center justify-center">
-
-    <div class="bg-white w-full h-full md:w-4/5 md:h-4/5 rounded-2xl flex flex-col">
-            <div class="flex items-center justify-between px-4 py-3 border-b">
-                <h2 class="font-bold">Pilih Lokasi</h2>
-                <button onclick="closeMap()">✕</button>
-            </div>
-            <div class="p-4 flex-1 overflow-y-auto">
-                <input id="search"
-                    type="search"
-                    placeholder="Cari alamat atau tempat"
-                    class="w-full mb-3 px-4 py-2 border rounded-lg">
-            <div id="map" style="height: 60vh; width: 100%;" class="rounded-xl"></div>
-
-            </div>
-            <div class="p-4 border-t text-right">
-                <button onclick="saveLocation()"
-                        class="px-5 py-2 bg-green-600 text-white rounded-xl">
-                    Gunakan lokasi ini
-                </button>
-            </div>
-        </div>
-    </div>
-
-
+        <x-map />
     </div>
 </x-app-layout>

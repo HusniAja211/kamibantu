@@ -23,6 +23,12 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('events', EventController::class)
         ->except(['index']);
 
+    // Route index kegiatan dibuat secara manual.
+    // Hal ini karena events.index dikecualikan dari Route::resource
+    // agar halaman dashboard dan daftar kegiatan bisa memakai logic controller yang sama.
+    Route::get('/events', [EventController::class, 'index'])
+        ->name('events.index');
+
     // Kelola event (custom)
     Route::get('/events/{event}/manage', [EventController::class, 'manage'])
         ->name('events.manage');

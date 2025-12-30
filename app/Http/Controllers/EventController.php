@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,9 +25,11 @@ class EventController extends Controller
     /**
      * Form create event
      */
-    public function create()
+    public function create(Event $event)
     {
-        return view('events.create');
+         $categories = Category::all();
+
+        return view('events.create', compact('categories'));
     }
 
     /**
@@ -37,7 +40,6 @@ class EventController extends Controller
         $validated = $request->validate([
             'title'              => ['required', 'string', 'max:255'],
             'description'        => ['required', 'string'],
-            'category'           => ['required', 'string'],
             'location_name'      => ['required', 'string', 'max:255'],
             'latitude'           => ['required', 'numeric'],
             'longitude'          => ['required', 'numeric'],
@@ -45,6 +47,7 @@ class EventController extends Controller
             'end_date'           => ['required', 'date', 'after:start_date'],
             'target_volunteers'  => ['nullable', 'integer', 'min:1'],
             'banner'             => ['nullable', 'image', 'max:5120'],
+            'category_id' => ['required', 'exists:categories,id'],
         ]);
 
         // Handle banner upload
@@ -60,7 +63,7 @@ class EventController extends Controller
 
         return redirect()
             ->route('events.show', $event)
-            ->with('success', 'Kegiatan berhasil dibuat 🎉');
+            ->with('success', 'Kegiatan berhasil dibuat ');
     }
 
     /**
@@ -80,7 +83,9 @@ class EventController extends Controller
     {
         $this->authorizeOwner($event);
 
-        return view('events.edit', compact('event'));
+        $categories = Category::all();
+
+        return view('events.edit', compact('event', 'categories'));
     }
 
     /**
@@ -110,9 +115,8 @@ class EventController extends Controller
 
         $event->update($validated);
 
-        return redirect()
-            ->route('events.show', $event)
-            ->with('success', 'Kegiatan berhasil diperbarui ✅');
+        return back()
+            ->with('success', 'Kegiatan berhasil diperbarui ');
     }
 
     /**
@@ -123,9 +127,11 @@ class EventController extends Controller
         $this->authorizeOwner($event);
 
         $event->load('participants.user');
+        $categories = Category::all();
 
-        return view('events.manage', compact('event'));
+        return view('events.manage', compact('event', 'categories'));
     }
+
 
     /**
      * Hapus event

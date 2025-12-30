@@ -32,5 +32,6 @@
         <div class="bg-red-100" hidden></div>
     </main>
         @include('layouts.footer')
+        <x-sweet-alert />
     </body>
 </html>
